@@ -1,0 +1,22 @@
+{
+  "name": "config-manager",
+  "version": "0.0.1",
+  "author": "Ricky Chien <ricky060709@gmail.com>",
+  "description": "Handing build config / definition paramenters",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rickychien/config-manager.git"
+  },
+  "engines": {
+    "node": ">=0.12"
+  },
+  "readme": "README.md",
+  "devDependencies": {
+    "babel": "^5.6.23",
+    "mocha": "^2.2.5"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha"
+  }
+}
