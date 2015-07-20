@@ -1,12 +1,12 @@
 {
-  "name": "config-manager",
+  "name": "cfg-manager",
   "version": "0.0.1",
   "author": "Ricky Chien <ricky060709@gmail.com>",
-  "description": "Handing build config / definition paramenters",
+  "description": "Managing config and environment variables",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rickychien/config-manager.git"
+    "url": "git+https://github.com/rickychien/cfg-manager.git"
   },
   "engines": {
     "node": ">=0.12"
