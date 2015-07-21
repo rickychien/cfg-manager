@@ -43,6 +43,28 @@ var cfgManager = require('cfg-manager');
 var config = cfgManager.getConfig();
 ```
 
+### APIs
+
+#### init(defaultConfig, [options])
+
+Initialize config object by merging given confg object and given environment variables.
+
+options: ```Object```
+
+return: ```Object```
+
+##### options.prefix
+
+Environment variable prefix. Cfg-manager only parse environment variables if they begin with given prefix.
+
+type: ```string```
+
+default: ```'APP_'```
+
+#### getConfig()
+
+Return config object directly if config has been initialized and existed in environment variable CONFIG_MANAGER_ENVS.
+
 ## Development
 
 ### Running unit test
