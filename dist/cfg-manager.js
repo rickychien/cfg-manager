@@ -22,37 +22,66 @@ var CfgManager = (function () {
   }
 
   _createClass(CfgManager, [{
-    key: '_isNumeric',
-    value: function _isNumeric(number) {
-      return !isNaN(parseFloat(number)) && isFinite(number);
+    key: '_checkingConfig',
+    value: function _checkingConfig(config) {
+      for (var key in config) {
+        if (typeof config[key] !== 'string') {
+          throw new Error('Configuration value must be a string type.');
+        }
+      }
     }
 
     /**
      * Import and merge config from a JSON file
      *
      * @param {String} file - Path to a config JSON file
-     * @return {Object} return a merged config
+     * @return {Object} return CfgManager itself for chaining 
      */
   }, {
     key: 'file',
     value: function file(_file) {
       var content = _fs2['default'].readFileSync(_file, { encoding: 'utf-8' });
       var config = JSON.parse(content);
+      this._checkingConfig(config);
       Object.assign(this._config, config);
-      return this._config;
+      return this;
     }
 
     /**
      * Import and merge config from given config object
      *
      * @param {Object} config - Config object
-     * @return {Object} return a merged config
+     * @return {Object} return CfgManager itself for chaining 
      */
   }, {
     key: 'config',
     value: function config(_config) {
+      this._checkingConfig(_config);
       Object.assign(this._config, _config);
-      return this._config;
+      return this;
+    }
+
+    /**
+     * Import and merged config from envrionment variables
+     *
+     * @param {Array} [whitelist] - An array of whitelist environment varialbes
+     * @return {Object} return CfgManager itself for chaining 
+     */
+  }, {
+    key: 'env',
+    value: function env(whitelist) {
+      var env = process.env;
+
+      if (whitelist && Array.isArray(whitelist)) {
+        for (var key in env) {
+          if (whitelist.indexOf(key) === -1) {
+            delete env[key];
+          }
+        }
+      }
+
+      Object.assign(this._config, env);
+      return this;
     }
 
     /**
@@ -64,18 +93,7 @@ var CfgManager = (function () {
   }, {
     key: 'get',
     value: function get(name) {
-      var config = this._config;
-      var env = process.env;
-
-      for (var key in env) {
-        if (config[key] !== undefined) {
-          var value = env[key];
-          // Convert string into number if it's a number
-          config[key] = this._isNumeric(value) ? parseFloat(value) : value;
-        }
-      }
-
-      return config[name];
+      return this._config[name];
     }
   }]);
 
