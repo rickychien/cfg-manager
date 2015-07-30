@@ -1,4 +1,5 @@
 {
+  "mocha": true,
   "node": true,
-  "mocha": true
+  "strict": false
 }
