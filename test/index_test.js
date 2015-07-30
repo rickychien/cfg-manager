@@ -2,9 +2,6 @@ var CfgManager = require('../index');
 var assert = require('assert');
 
 suite('Config Manager', function() {
-  var config1;
-  var config2;
-  var expect;
   var cfg;
 
   setup(function() {
@@ -26,18 +23,8 @@ suite('Config Manager', function() {
   });
 
   test('#config()', function() {
-    let config1 = {
-      DEBUG: '0',
-      DIR_PATH: 'path/to/config_1'
-    };
-
-    let config2 = {
-      PRODUCTION: '0',
-      DIR_PATH: 'path/to/config_2'
-    };
-
-    cfg.config(config1)
-       .config(config2);
+    cfg.config({ DEBUG: '0', DIR_PATH: 'path/to/config_1' })
+       .config({ PRODUCTION: '0', DIR_PATH: 'path/to/config_2' });
 
     assert.strictEqual(cfg.get('DEBUG'), '0');
     assert.strictEqual(cfg.get('PRODUCTION'), '0');
@@ -64,6 +51,7 @@ suite('Config Manager', function() {
        .env();
 
     assert.strictEqual(cfg.get('DEBUG'), '0');
+    assert.strictEqual(cfg.get('PRODUCTION'), '0');
     assert.strictEqual(cfg.get('DIR_PATH'), 'path/to/dir');
     assert.strictEqual(cfg.get('INEXISTENT'), undefined);
   });
