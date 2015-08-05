@@ -1,3 +1,4 @@
+import 'babel/polyfill';
 import fs from 'fs';
 
 export default class CfgManager {
