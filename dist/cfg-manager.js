@@ -72,13 +72,19 @@ var CfgManager = (function () {
   }, {
     key: 'env',
     value: function env(whitelist) {
-      var env = process.env;
+      var env = Object.assign({}, process.env);
 
       if (whitelist && Array.isArray(whitelist)) {
         for (var key in env) {
           if (whitelist.indexOf(key) === -1) {
             delete env[key];
           }
+        }
+      }
+
+      for (var key in env) {
+        if (key.indexOf('npm_') === 0) {
+          delete env[key];
         }
       }
 

@@ -6,11 +6,9 @@ suite('Config Manager', () => {
 
   setup(() => {
     cfg = new CfgManager();
-    process.env = {
-      DEBUG: '0',
-      PRODUCTION: '0',
-      DIR_PATH: 'path/to/dir'
-    };
+    process.env.DEBUG = '0';
+    process.env.PRODUCTION = '0';
+    process.env.DIR_PATH = 'path/to/dir';
   });
 
   test('#file()', () => {
