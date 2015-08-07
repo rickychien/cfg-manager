@@ -1,6 +1,6 @@
 {
   "name": "cfg-manager",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Ricky Chien <ricky060709@gmail.com>",
   "description": "Managing config and environment variables",
   "license": "MIT",
