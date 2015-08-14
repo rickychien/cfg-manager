@@ -1,4 +1,3 @@
---compilers babel:babel/register
 --reporter spec
 --timeout 60s
 --ui tdd

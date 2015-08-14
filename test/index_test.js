@@ -10,7 +10,7 @@ suite('Config Manager', function() {
   });
 
   test('#file()', function() {
-    cfg.file(`${__dirname}/config.json`);
+    cfg.file(__dirname + '/config.json');
 
     assert.strictEqual(cfg.get('FILE_PATH'), 'path/to/file');
     assert.strictEqual(cfg.get('LOCALE'), 'en-US');

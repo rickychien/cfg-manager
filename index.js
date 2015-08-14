@@ -1,4 +1,5 @@
 var fs = require('fs');
+var objectAssign = require('object-assign');
 
 function CfgManager() {
   this._config = {};
@@ -24,7 +25,7 @@ CfgManager.prototype = {
     var content = fs.readFileSync(file, { encoding: 'utf-8' });
     var config = JSON.parse(content);
     this._checkingConfig(config);
-    Object.assign(this._config, config);
+    objectAssign(this._config, config);
     return this;
   },
 
@@ -36,7 +37,7 @@ CfgManager.prototype = {
    */
   config: function(config) {
     this._checkingConfig(config);
-    Object.assign(this._config, config);
+    objectAssign(this._config, config);
     return this;
   },
 
@@ -47,7 +48,7 @@ CfgManager.prototype = {
    * @return {Object} return CfgManager itself for chaining 
    */
   env: function(whitelist) {
-    var env = Object.assign({}, process.env);
+    var env = objectAssign({}, process.env);
 
     if (whitelist && Array.isArray(whitelist)) {
       for (var key in env) {
@@ -63,7 +64,7 @@ CfgManager.prototype = {
       }
     }
 
-    Object.assign(this._config, env);
+    objectAssign(this._config, env);
     return this;
   },
 
