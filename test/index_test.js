@@ -1,17 +1,15 @@
-import assert from 'assert';
-import CfgManager from '../index';
+var assert = require('assert');
+var cfg = require('../index');
 
-suite('Config Manager', () => {
-  var cfg;
+suite('Config Manager', function() {
 
-  setup(() => {
-    cfg = new CfgManager();
+  setup(function() {
     process.env.DEBUG = '0';
     process.env.PRODUCTION = '0';
     process.env.DIR_PATH = 'path/to/dir';
   });
 
-  test('#file()', () => {
+  test('#file()', function() {
     cfg.file(`${__dirname}/config.json`);
 
     assert.strictEqual(cfg.get('FILE_PATH'), 'path/to/file');
@@ -20,7 +18,7 @@ suite('Config Manager', () => {
     assert.strictEqual(cfg.get('VALUE'), '100');
   });
 
-  test('#config()', () => {
+  test('#config()', function() {
     cfg.config({ DEBUG: '0', DIR_PATH: 'path/to/config_1' })
        .config({ PRODUCTION: '0', DIR_PATH: 'path/to/config_2' });
 
@@ -29,7 +27,7 @@ suite('Config Manager', () => {
     assert.strictEqual(cfg.get('DIR_PATH'), 'path/to/config_2');
   });
 
-  test('#env()', () => {
+  test('#env()', function() {
     cfg.env();
 
     assert.strictEqual(cfg.get('DEBUG'), '0');
@@ -37,14 +35,14 @@ suite('Config Manager', () => {
     assert.strictEqual(cfg.get('DIR_PATH'), 'path/to/dir');
   });
 
-  test('#env(whitelist)', () => {
+  test('#env(whitelist)', function() {
     cfg.env(['DEBUG', 'DIR_PATH']);
 
     assert.strictEqual(cfg.get('DEBUG'), '0');
     assert.strictEqual(cfg.get('DIR_PATH'), 'path/to/dir');
   });
 
-  test('#get(name)', () => {
+  test('#get(name)', function() {
     cfg.config({ DEBUG: '1', DIR_PATH: 'path/to/config' })
        .env();
 
